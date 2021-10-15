@@ -10,7 +10,7 @@ import ComingSoonNft from "./components/ComingSoonNft";
 import Community from "./components/Community";
 import News from "./components/News";
 import MobNav from "./components/MobNav";
-import Lotto from "./components/Lotto"
+import Lottery from './components/Lotto'
 
 function App() {
   const [show, setShow] = useState(true);
@@ -103,7 +103,7 @@ function App() {
       <div>
         <Route path="/" exact component={HomePage} />
         <Route path="/swap" exact component={ComingSoon} />
-        <Route path="/comingsoon" exact component={Lotto} />
+        <Route path="/comingsoon" exact component={Lottery} />
         <Route path="/comingsoonnft" exact component={ComingSoonNft} />
         <Route path="/comingsoonstaking" exact component={ComingSoon} />
         <Route path="/community" exact component={Community} />

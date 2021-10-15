@@ -1,63 +1,37 @@
-import React,{useState} from "react";
-import { rollIn } from "react-animations";
-import Image3 from "../assets/Image3.png";
+import React, { useState } from "react";
+import Lottery from './lotterycomponets/web3/Lottery'
+import './lotterystyle.css'
+import web3 from "./lotterycomponets/web3/web3";
+import Lotteryhead from './lotterycomponets/Lotteryhead'
 
 const ComingSoon = () => {
-    const [day, setDay] = useState(0)
-    const [hour, setHour] = useState(0)
-    const [min, setMin] = useState(0)
-    const [sec, setSec] = useState(0)
-    const [show, setShow] = useState(true)
-    const [runtime, setRuntime] = useState(true)
-    var x
-    
 
-  function countdownTimeStart(){
+    var isMetaMaskPresent = false
+    var isMetaMaskLoggedin = false
+    isMetaMaskPresent = web3 ? true : false;
 
-    var countDownDate = new Date("Oct 15, 2021 17:53:00").getTime();
-     x = setInterval(function() {
-        var now = new Date().getTime();
+    async function create(){
+    if (isMetaMaskPresent) {
+        const accounts = await web3.eth.getAccounts();
+        isMetaMaskLoggedin = accounts.length ? true : false;
+    }
+    }
 
-        var distance = countDownDate - now;
-        
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24) * (1000 * 60 * 60));
-        setDay(days)
-
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        setHour(hours)
-        
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        setMin(minutes)
-        
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        setSec(seconds)
-        
-       
-    }, 1000);}
-
-    countdownTimeStart()
-    
-   
+    create();
     return (
-    <div className="wrapper">
-        <div className='parent-lotto'>
-
-          <div class='child-lotto'>
-            <h1 style={{color:'#0c7538', fontSize:'70px'}}>  FOMOBABY LOTTO  </h1>
-          </div>
-
-          <div class='child-lotto'>$ 2000</div>
-          <div class='child-lotto-timer'>{day}d : {hour}h : {min}m : {sec}s </div>
-
-          <div class={show?'child-lotto':'child-lotto-notshow'}>
-          <button className='connect-button-lotto'> Connect Wallet </button>
-          </div>
-
-
-
-        </div>
+      
+   <div className="wrapper">
+    <div className='paraent-grid'>
+    <div class="alert alert-primary " role="alert">
+     To play this lottery please make sure that metamask is connected to Binance Smart chain.
     </div>
-  );
+    <div class="container">
+     <Lotteryhead/>
+    </div>
+    </div>
+  </div>
+        
+    ) 
 };
 
 export default ComingSoon;
