@@ -1,8 +1,68 @@
-.card-header {
-  background: #39b554;
-  color: #fff;
+body {
+  background-image: url("https://res.cloudinary.com/ontraveldiary/image/upload/v1633290594/FOMOBABY/bg-top.ab4f7003_uiksih.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
-.my-lottery-color {
-  background-color: lightgreen;
+.paraent{
+  display: flex;
+  
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.card{
+  box-shadow: 5px 5px rgba(0, 171, 24, 0.05);
+  
+}
+.card-body{
+  background-color: rgb(21, 146, 42);
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+
+}
+.card-title{
+  background-color: rgb(193, 255, 219);
+  border-radius: 3px;
+  text-align: start;
+  padding: 5px
+}
+.card-subtitle{
+  background-color: rgb(193, 255, 219);
+  border-radius: 3px;
+  text-align: start;
+  padding: 5px
+
+}
+
+.card-text{
+  font-weight: 500;
+  font-size: medium;
+  color: white;
+}
+.winner{
+  font-size: 30px;
+  color: rgb(76, 238, 76);
+
+}
+.lottery-expired{
+  font-weight: 900;
+  color: rgb(201, 48, 48);
+}
+
+.card-link{
+  font-size: 30px;
+  color: rgb(76, 238, 76);
+}
+.play-btn{
+  padding: 10px 20px 10px 20px;
+  color: aliceblue;
+  background-color: rgb(5, 192, 5);
+  border: none;
+  margin-top: -5px;
+  border-radius: 5px;
+  text-decoration: none;
 }

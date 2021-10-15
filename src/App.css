@@ -1331,47 +1331,21 @@ ul {
 }
 
 
-.wrapper-lotto{
-background-color: #e0ffed;
-}
 
-.parent-lotto{
+.paraent-grid{
   display: grid;
-  background-color: #e0ffed;
-  justify-content: center;
   width: 100%;
-  padding: 90px 10px 10px 10px;
+  justify-content: center;
+  
+
+}
+
+.lotto-alter{
+  color: #222;
+  background-color: transparent;
   text-align: center;
-  grid-gap: 40px;
+  font-size: 25px;
+  font-weight: 800;
 }
 
-.child-lotto{
-  
-  
-  font-size: 30px;
-  font-weight: 400;
-}
 
-.connect-button-lotto{
-  color: #fff;
-  background-color: #28B162;
-  padding: 13px;
-  border-radius: 30px;
-  text-decoration: none;
-  border: none
-
-}
-.child-lotto-notshow{
-  display: none;
-}
-
-.child-lotto-container{
-  display: grid;
-  grid-gap: 30px;
-  align-items: center;
-}
-.child-lotto-timer{
-
-font-size: large;
-
-}
