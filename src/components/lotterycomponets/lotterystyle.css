@@ -7,7 +7,6 @@ body {
 
 .paraent{
   display: flex;
-  
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
@@ -18,22 +17,25 @@ body {
   
 }
 .card-body{
-  background-color: rgb(21, 146, 42);
+  background-color: rgba(248, 255, 247, 0.849);
   color: black;
   border-radius: 5px;
   text-align: center;
 
 }
 .card-title{
-  background-color: rgb(193, 255, 219);
+  background-color: rgb(6, 189, 0);
   border-radius: 3px;
   text-align: start;
+  width: 100%;
+  color: white;
   padding: 5px
 }
 .card-subtitle{
-  background-color: rgb(193, 255, 219);
+  background-color: rgb(6, 189, 0);
   border-radius: 3px;
   text-align: start;
+  color: white;
   padding: 5px
 
 }
@@ -41,7 +43,7 @@ body {
 .card-text{
   font-weight: 500;
   font-size: medium;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .winner{
   font-size: 30px;

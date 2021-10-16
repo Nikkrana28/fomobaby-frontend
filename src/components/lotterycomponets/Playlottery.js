@@ -18,7 +18,7 @@ function Playlottery() {
                 <form onSubmit={submit} className='child-flex'>
                     <div class="form-group">
                         <label for="foroupExampleInputmGr">Enter your Telegram user name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telegrm@name" value={name} onChange={(e) => setName(e.target.value)}></input>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telegram@name" value={name} onChange={(e) => setName(e.target.value)}></input>
                     </div>
                     <br />
                     <div class="form-group">

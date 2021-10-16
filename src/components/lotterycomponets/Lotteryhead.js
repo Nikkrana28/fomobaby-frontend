@@ -5,24 +5,32 @@ import Lottery from "./web3/Lottery";
 import './lotterystyle.css'
 import Playlottery from './Playlottery';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { logDOM } from '@testing-library/dom';
 
 
 
 function Lotteryhead() {
 
-  // useEffect(() => {
-  //   getlotteryaddress();
-  //   accountsaddress();
-  //   main();
-  // }, [])
+  
 
 
-  // const [lotteryaddress, setLotteryaddress] = useState([]);
-  // const [address, setAddress] = useState([]);
+  const [currentlottery, setCurrentlottery] = useState([]);
+  const [id, setId] = useState();
+  // const currentlottery = []
   // const [lotteryname, setLotteryname] = useState();
   // const [manageraddress, setManageraddress] = useState();
-  const [status, setStatus] = useState(true);
-  
+  const [status, setStatus] = useState(false);
+
+
+  useEffect(() => {
+    const enable = () =>{
+      get();
+    }
+    enable();
+    // getlotteryaddress();
+    // accountsaddress();
+    // main();
+  }, []);
 
 
   // async function getlotteryaddress() {
@@ -49,6 +57,27 @@ function Lotteryhead() {
   //     setLotteryname(name);
   //   });
 
+  //  async function get(){
+  //     console.log("1")
+  //       let data = await LotteryGenerator.methods.getCurrentLotteryStats().call();
+  //       setId(data[1])
+  //       for(let i = id; i >= 0; i--){
+  //         console.log("run")
+  //         var lottodata = await LotteryGenerator.methods.getLotteryStats(i).call();
+  //           console.log('data',lottodata)
+  //           currentlottery.push(lottodata)
+  //       }
+  //     }
+      console.log("run1")
+      const get = () => {
+        console.log("run2")
+        let lotid =  LotteryGenerator.methods.getCurrentLotteryStats().call();
+        console.log("id is",lotid)
+        console.log("run3")
+      }
+
+   
+
 
   //   Lottery.methods.manager().call().then(managerAddress => {
   //     setManageraddress(managerAddress)
@@ -65,26 +94,49 @@ function Lotteryhead() {
 
   return (
     <div>
-      {show ? <Playlottery/> :
-      <div className='paraent'>
-        <div class="card" style={{ width: "18rem" }}>
-          <div class="card-body">
-            <h5 class="card-title">Pot Value: </h5>
-            <h6 class="card-subtitle mb-2 text-muted">Lottery ID: </h6>
-            <p class="card-text">Lottery Address: ********************</p>
-            {status? 
-            <button onClick={() =>{setShow(true)} } class="play-btn">Play</button>
-            :<h5 className='winner'>Winner Name</h5>}
-            <br/>
-            <br/>
-            {status? <h6 href="#" class="card-link">Live</h6> : <h6 className='lottery-expired'>Lottery Expired</h6>}
-          </div>
-        </div>
-      </div>}
+    {show ? <Playlottery/>:
+         <div className='paraent'>
 
-      
-      {show?<button onClick={() =>{setShow(!true)}} class="play-btn" >Go Back</button>:null}
-    </div>
+          {currentlottery.map(item => 
+           <div className="card" style={{ width: "18rem" }}>
+             <div className="card-body">
+               <h5 className="card-title">Pot Value: $3000 </h5>
+               <h6 className="card-subtitle mb-2 ">Lottery ID: {item[2]}</h6>
+               <p className="card-text">Lottery Address: {item[0]} </p>
+               <br/>
+               {item[5] ? <button onClick={() =>{setShow(true)} } class="play-btn">Play</button> : <h5 className='winner'>Winner Name</h5>}
+               <br/>
+               <br/>
+               {item[5]? <h6 href="#" class="card-link">Live</h6> : <h6 className='lottery-expired'>Lottery Expired</h6>}
+             </div>
+           </div>)}
+
+         </div>}
+  
+         {show?<button onClick={() =>{setShow(!true)}} className="play-btn" >Go Back</button>:null}
+       </div>
+     
+//     <div>
+//  {show ? <Playlottery/>:
+//       <div className='paraent'>
+//         <div class="card" style={{ width: "18rem" }}>
+//           <div class="card-body">
+//             <h5 class="card-title">Pot Value: ***** </h5>
+//             <h6 class="card-subtitle mb-2 ">Lottery ID: 0</h6>
+//             <p class="card-text">Lottery Address:  </p>
+//             <br/>
+//             {status? 
+//             <button onClick={() =>{setShow(true)} } class="play-btn">Play</button>
+//             :<h5 className='winner'>Winner Name</h5>}
+//             <br/>
+//             <br/>
+//             {status? <h6 href="#" class="card-link">Live</h6> : <h6 className='lottery-expired'>Lottery Expired</h6>}
+//           </div>
+//         </div>
+//       </div>}
+
+//       {show?<button onClick={() =>{setShow(!true)}} class="play-btn" >Go Back</button>:null}
+//     </div>
 
 
     // <div>

@@ -4,7 +4,7 @@ import config from './config';
 
 var lotteryGenerator;
 if(web3){
-    lotteryGenerator = new web3.eth.Contract(JSON.parse(lotteryGeneratorJson.interface), config.lotteryFactoryAddress);
+    lotteryGenerator = new web3.eth.Contract(lotteryGeneratorJson, config.lotteryFactoryAddress);
 }
 
 export default lotteryGenerator
