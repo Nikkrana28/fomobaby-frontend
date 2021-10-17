@@ -1334,6 +1334,7 @@ ul {
 
 .paraent-grid{
   display: grid;
+
   width: 100%;
   justify-content: center;
   
