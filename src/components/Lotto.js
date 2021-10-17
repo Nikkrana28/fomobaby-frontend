@@ -3,6 +3,7 @@ import Lottery from './lotterycomponets/web3/LotteryGenerator'
 import Lotteryhead from './lotterycomponets/Lotteryhead'
 import Web3 from 'web3';
 import lotteryGeneratorJson from './lotterycomponets/contract/LotteryGenerator.json';
+import Logo from './../assets/lottery-page-header1.png'
 
 
 const ComingSoon = () => {
@@ -20,7 +21,7 @@ const ComingSoon = () => {
 
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
-    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0xAD7e2B309AcBEe3875F8F7B96D69F743e20cABe2")
+    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0x3022fa5e88c46860f7BA79b48748A572218e64A6")
   }
   const get = async () => {
     let lotdata = await contractobj.methods.getCurrentLotteryStats().call();
@@ -35,8 +36,11 @@ const ComingSoon = () => {
     <div className="wrapper">
       
       <div className='paraent-grid'>
-        <div class="alert alert-primary lotto-alter" role="alert">
-          To play this lottery please make sure that metamask is connected to Binance Smart chain.
+        <div class="alert lotto-alter" role="alert">
+         <img src={Logo}/>
+         <br/>
+         <br/>
+         <br/>
         </div>
         <div class="lotto-com">
           <Lotteryhead lotteryadd={currentlottery[0]} lotterystats={currentlottery[5]} id={currentlottery[1]} />

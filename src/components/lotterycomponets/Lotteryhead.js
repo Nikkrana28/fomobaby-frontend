@@ -12,6 +12,7 @@ function Lotteryhead({lotteryadd, lotterystats, id}) {
   const [status, setStatus] = useState(false);
   const [show, setShow] = useState(false)
   const [showexpired, setShowexpired] = useState(false)
+  const [expirdid, setExpiredid] = useState([])
   var web3
   var contractobj
 
@@ -20,6 +21,11 @@ function Lotteryhead({lotteryadd, lotterystats, id}) {
   if(id > 0){
     setExpiredlottery(true)
   }
+  else{
+    for(let i = 5; i > 0; i--)
+    expirdid.push(i) 
+  }
+  console.log(expirdid)
 
   return (
     <div>
