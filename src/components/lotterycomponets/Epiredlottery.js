@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-function Epiredlottery()  {
+function Epiredlottery({ids})  {
     return (
         <div>
-            Lottery Expired
+            <h1>{ids}</h1>
         </div>
     )
 }

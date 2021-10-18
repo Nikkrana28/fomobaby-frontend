@@ -4,7 +4,7 @@ import './Playlottery.css'
 import LotteryGeneratorJson from './contract/LotteryGenerator.json'
 import Web3 from 'web3'
 
-function Playlottery() {
+function Playlottery({participants}) {
     const [name, setName] = useState("")
     const [eth, setEth] = useState()
     var web3
@@ -12,23 +12,23 @@ function Playlottery() {
 
     if (window.ethereum) {
         web3 = new Web3(window.ethereum);
-        contractobj = new web3.eth.Contract(LotteryGeneratorJson, "0x3022fa5e88c46860f7BA79b48748A572218e64A6")
+        contractobj = new web3.eth.Contract(LotteryGeneratorJson, "0x5726118dF11A5B51933eF2b822f0B5293d285f1c")
       }
-
-
-
-
+    
     const submit = (event) => {
         event.preventDefault();
         if(eth > 25){
             window.alert("Max Tickests Purches 25 only")
         }
-        else{
-            const buytickets = async() =>{
-            let tickets = await contractobj.methods.currentLottery().buyTickets().call();
-            console.log('tickets',tickets)
+    
+        else{  
+        try{
+        let tickets = contractobj.methods.enterLottery().call();
+        console.log('tickets',tickets)
         }
-        buytickets();
+        catch(error){
+            console.log(error)
+        }
     }
     };
 
@@ -50,36 +50,19 @@ function Playlottery() {
             </div>
 
             <div>
-                <table class="table table-bordered table-striped mb-0 table-responsive">
+                <table class="table table-bordered table-striped mb-0 table-responsive text-center">
                     <thead>
                         <tr>
-                            <th scope="col">----------- All Players ----------- </th>
+                            <th scope="col">----------- All Players ({participants.length})----------- </th>
                         </tr>
                     </thead>
                     <tbody>
+                        {participants.map(items =>
                         <tr>
                             
-                            <td>@mdo</td>
+                            <td>{items}</td>
                         </tr>
-                        <tr>
-                        
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                          
-                            <td>@twitter</td>
-                        </tr>
-                        <tr>
-                            
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            
-                            <td>@twitter</td>
-                        </tr>
+                        )}
                     </tbody>
                 </table>
 

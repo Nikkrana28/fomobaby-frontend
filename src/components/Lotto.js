@@ -9,25 +9,37 @@ import Logo from './../assets/lottery-page-header1.png'
 const ComingSoon = () => {
 
   const [currentlottery, setCurrentlottery] = useState([]);
+
+  const [winner, setWinner] = useState()
   const [id, setId] = useState();
   var isMetaMaskPresent = false
   var isMetaMaskLoggedin = false
   var web3
   var contractobj
-  useEffect(() => {
-    get();
-   
-  }, [])
 
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
-    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0x3022fa5e88c46860f7BA79b48748A572218e64A6")
+    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0x5726118dF11A5B51933eF2b822f0B5293d285f1c")
   }
-  const get = async () => {
+
+  try{
+    useEffect(() => {
+      get();
+     
+    }, [])
+    const get = async () => {
     let lotdata = await contractobj.methods.getCurrentLotteryStats().call();
     setCurrentlottery(lotdata)
+    const id = lotdata[1]
+
+    let win = await contractobj.methods.getLotteryStats(id).call();
+    setWinner(win[2])
+    
+  }}
+  catch(erroe){
+
   }
-  console.log(currentlottery)
+  
 
 
   
@@ -37,13 +49,13 @@ const ComingSoon = () => {
       
       <div className='paraent-grid'>
         <div class="alert lotto-alter" role="alert">
-         <img src={Logo}/>
+         <img src={Logo} style={{width:"960px",height:"300px"}}/>
          <br/>
          <br/>
          <br/>
         </div>
         <div class="lotto-com">
-          <Lotteryhead lotteryadd={currentlottery[0]} lotterystats={currentlottery[5]} id={currentlottery[1]} />
+          <Lotteryhead lotteryadd={currentlottery[0]} id={currentlottery[1]} players={currentlottery[2]} lotterystats={currentlottery[6]} winner={winner}/>
         </div>
       </div>
     </div>
