@@ -11,6 +11,7 @@ const ComingSoon = () => {
   const [currentlottery, setCurrentlottery] = useState([]);
 
   const [winner, setWinner] = useState()
+  const [winningamount, setWinningamount] = useState()
   const [id, setId] = useState();
   var isMetaMaskPresent = false
   var isMetaMaskLoggedin = false
@@ -34,6 +35,8 @@ const ComingSoon = () => {
 
     let win = await contractobj.methods.getLotteryStats(id).call();
     setWinner(win[2])
+    setWinningamount(win[3] / (10**18))
+
     
   }}
   catch(erroe){
@@ -55,7 +58,7 @@ const ComingSoon = () => {
          <br/>
         </div>
         <div class="lotto-com">
-          <Lotteryhead lotteryadd={currentlottery[0]} id={currentlottery[1]} players={currentlottery[2]} lotterystats={currentlottery[6]} winner={winner}/>
+          <Lotteryhead lotteryadd={currentlottery[0]} id={currentlottery[1]} players={currentlottery[2]} lotterystats={currentlottery[6]} winners={winner} winningamount={winningamount}/>
         </div>
       </div>
     </div>

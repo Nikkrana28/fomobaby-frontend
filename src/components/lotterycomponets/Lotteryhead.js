@@ -6,7 +6,7 @@ import Web3 from 'web3';
 import lotteryGeneratorJson from './contract/LotteryGenerator.json';
 import Expiredlottery from './Epiredlottery'
 
-function Lotteryhead({ lotteryadd, id, players, lotterystats, winner }) {
+function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningamount }) {
 
   const [expiredlottery, setExpiredlottery] = useState(false);
   const [status, setStatus] = useState(false);
@@ -22,10 +22,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winner }) {
 
   }, [])
 
-  if(winner != 0x0000000000000000000000000000000000000000 && winner != undefined)
-  {
-    setShowwinner(true)
-  }
+ 
 
   // const countid = () => {
   //   if (false) {
@@ -36,8 +33,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winner }) {
   //       expirdid.push(i)
   //   }
   // }
-  console.log('winner',winner)
-
+  console.log("Winner Amount", winningamount)
 
   return (
     <div>
@@ -45,14 +41,14 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winner }) {
         <div className='paraent'>
           <div className="card" style={{ width: "18rem" }}>
             <div className="card-body">
-              <h5 className="card-title">Pot Value: $3000 </h5>
+              <h5 className="card-title">Pot Value: <span className="card-title"> {winningamount} BNB </span></h5>
               <h6 className="card-subtitle mb-2 ">Lottery ID: {id}</h6>
               <p className="card-text">Lottery Address: {lotteryadd}</p>
               <br />
-              {lotterystats ? <button onClick={() => { setShow(true) }} class="play-btn">Play</button> : <h5 className='winner'>{winner}</h5>}
+              {lotterystats ? <button onClick={() => { setShow(true) }} class="play-btn">Play</button> : <h5 className='winner'><span>Our winner is:  </span>{winners}</h5>}
               <br />
               <br />
-              {lotterystats ? <h6 href="#" class="card-link">Live</h6> : <h6 className='lottery-expired'>Lottery Expired</h6>}
+              {lotterystats ? <h6 href="#" class="card-link">Live</h6> : <h6 className='lottery-expired'>This Lottery is not Live</h6>}
             </div>
           </div>
 

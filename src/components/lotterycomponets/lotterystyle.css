@@ -46,9 +46,9 @@ body {
   color: rgb(0, 0, 0);
 }
 .winner {
-  font-size: 30px;
-  font-weight: 900;
-  color: rgb(76, 238, 76);
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(91, 161, 241);
 }
 
 .lottery-expired {
