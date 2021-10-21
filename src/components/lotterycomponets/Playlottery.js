@@ -23,7 +23,11 @@ function Playlottery({participants}) {
     
         else{  
         try{
-        let tickets = contractobj.methods.enterLottery().call();
+        let tickets = contractobj.methods.enterLottery({
+            from: '0xd1Ffbe730B63F482959b8535543A84eB268Df53c',
+            gas: "1000000",
+            value: web3.utils.toWei(0.01, "ether")
+          }).call();
         console.log('tickets',tickets)
         }
         catch(error){
@@ -33,12 +37,12 @@ function Playlottery({participants}) {
     };
 
     return (
-        <div className='playlottery'>
+        <div className='playlottery '>
             <div className='child-flex'>
                 <form onSubmit={submit} className='child-flex'>
                     <div class="form-group">
-                        <label for="foroupExampleInputmGr">Enter your Telegram user name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telegram@name" value={name} onChange={(e) => setName(e.target.value)}></input>
+                        <label for="foroupExampleInputmGr">Enter your Wallet Address</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Wallet Address" value={name} onChange={(e) => setName(e.target.value)}></input>
                     </div>
                     <br />
                     <div class="form-group">
@@ -53,7 +57,7 @@ function Playlottery({participants}) {
                 <table class="table table-bordered table-striped mb-0 table-responsive text-center">
                     <thead>
                         <tr>
-                            <th scope="col">----------- All Players ({participants.length})----------- </th>
+                            <th scope="col">----------- All Participants ({participants.length})----------- </th>
                         </tr>
                     </thead>
                     <tbody>

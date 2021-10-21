@@ -10,12 +10,17 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
+  background-color: rgb(139, 221, 139);
+  box-shadow: 10px 5px rgba(223, 236, 225, 0.658);
+  border-radius: 6px;
+  padding: 10px;
+
 }
 
-.card{
+.card {
   box-shadow: 5px 5px rgba(0, 171, 24, 0.05);
-  
 }
+
 .card-body{
   background-color: rgba(248, 255, 247, 0.849);
   color: black;

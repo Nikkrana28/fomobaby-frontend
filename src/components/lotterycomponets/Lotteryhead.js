@@ -6,40 +6,46 @@ import Web3 from 'web3';
 import lotteryGeneratorJson from './contract/LotteryGenerator.json';
 import Expiredlottery from './Epiredlottery'
 
-function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningamount }) {
+function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningamount, idslist }) {
 
-  const [expiredlottery, setExpiredlottery] = useState(false);
+  const [expiredlottery, setExpiredlottery] = useState(true);
   const [status, setStatus] = useState(false);
   const [show, setShow] = useState(false)
+  const [lastwinner, setLastwinner] = useState()
   const [showexpired, setShowexpired] = useState(false)
   const [expirdid, setExpiredid] = useState([])
   const [showwinner, setShowwinner] = useState(false)
   var web3
   var contractobj
 
-  useEffect(() => {
-    // countid();
+  if (window.ethereum) {
+    web3 = new Web3(window.ethereum);
+    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0x5726118dF11A5B51933eF2b822f0B5293d285f1c")
+  }
 
-  }, [])
+  
+  const getlastwinner = async (value) => {
+    return await contractobj.methods.getLotteryStats(value).call();
+  }
 
- 
+  function get (value){
 
-  // const countid = () => {
-  //   if (false) {
-  //     setExpiredlottery(false)
-  //   }
-  //   else {
-  //     for (let i = 4; i >= 0; i--)
-  //       expirdid.push(i)
-  //   }
-  // }
-  console.log("Winner Amount", winningamount)
+  (async () => {
+    let win = await getlastwinner(value)
+    setLastwinner(win[2])
+  })()
+
+   return lastwinner
+  }
+
+  console.log('winner', winners)
+  
 
   return (
     <div>
       {show ? <Playlottery participants={players}/> :
         <div className='paraent'>
-          <div className="card" style={{ width: "18rem" }}>
+          <div className="card" style={{ width: "22rem" }}>
             <div className="card-body">
               <h5 className="card-title">Pot Value: <span className="card-title"> {winningamount} BNB </span></h5>
               <h6 className="card-subtitle mb-2 ">Lottery ID: {id}</h6>
@@ -61,27 +67,13 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
           <br />
           <br />
           <br />
-          <br />
+          
           <h2>Expired Lotteries</h2>
-          <div className='paraent'>
-          {expirdid.map(ids => <div  >
-          {showexpired ? <Expiredlottery ids={ids} /> :
-            <div>
-              <div className="card" style={{ width: "18rem" }}>
-                <div className="card-body">
-                  <h5 className="card-title">Pot Value: $3000 </h5>
-                  <h6 className="card-subtitle mb-2 ">Lottery ID: {ids}</h6>
-                  <br />
-                  <button onClick={() => { setShowexpired(true) }} class="play-btn">See more</button>
-                  <br />
-                  <br />
-                  <h6 className='lottery-expired'>Lottery Expired</h6>
-                </div>
-              </div>
-            </div>}
-            </div>)}
+          <div className='paraent mt-3'>
+            {idslist.map(item => 
+            <Expiredlottery winner={get(item)}  id={idslist.indexOf(item)}/>)}
             </div>
-          {showexpired ? <button onClick={() => { setShowexpired(!true) }} className="play-btn" >Go Back</button> : null}
+          {/* {showexpired ? <button onClick={() => { setShowexpired(!true) }} className="play-btn" >Go Back</button> : null} */}
         </div> : null}
       <br />
       <br />
