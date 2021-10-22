@@ -10,7 +10,6 @@ import { isDOMComponent } from "react-dom/test-utils";
 const ComingSoon = () => {
 
   const [currentlottery, setCurrentlottery] = useState([]);
-
   const [winner, setWinner] = useState()
   const [winningamount, setWinningamount] = useState()
   const [idslist, setIdslist] = useState([])
@@ -20,7 +19,7 @@ const ComingSoon = () => {
 
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
-    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0x5726118dF11A5B51933eF2b822f0B5293d285f1c")
+    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0xa2D52E6F7c4488680FFb62397913be9718724eA2")
   }
 
   try {
@@ -29,10 +28,13 @@ const ComingSoon = () => {
 
     }, [])
     const get = async () => {
-      let lotdata = await contractobj.methods.getCurrentLotteryStats().call();
+      let currentlotteryid = await contractobj.methods.currentLotteryID().call();
+      console.log("current id ", currentlotteryid)
+
+      let lotdata = await contractobj.methods.getLotteryStats(currentlotteryid).call();
       setCurrentlottery(lotdata)
-      const id = lotdata[1]
-      setId(lotdata[1])
+      const id = currentlotteryid
+      setId(currentlotteryid)
 
       let win = await contractobj.methods.getLotteryStats(id).call();
       setWinner(win[2])
@@ -42,7 +44,7 @@ const ComingSoon = () => {
   catch (erroe) {
 
   }
- 
+
   if (id > 0) {
     for (let i = id - 1; i >= 0; i--) {
       if (!idslist.includes(i)) {
@@ -64,7 +66,7 @@ const ComingSoon = () => {
           <br />
         </div>
         <div class="lotto-com">
-          <Lotteryhead lotteryadd={currentlottery[0]} id={currentlottery[1]} players={currentlottery[2]} lotterystats={currentlottery[6]} winners={winner} winningamount={winningamount} idslist={idslist} />
+          <Lotteryhead lotteryadd={currentlottery[0]} id={id} players={currentlottery[1]} lotterystats={currentlottery[6]} winners={winner} winningamount={winningamount} idslist={idslist} />
         </div>
       </div>
     </div>

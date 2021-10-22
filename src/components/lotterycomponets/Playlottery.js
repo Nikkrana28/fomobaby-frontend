@@ -4,7 +4,7 @@ import './Playlottery.css'
 import LotteryGeneratorJson from './contract/LotteryGenerator.json'
 import Web3 from 'web3'
 
-function Playlottery({participants}) {
+function Playlottery({ participants, accounts }) {
     const [name, setName] = useState("")
     const [eth, setEth] = useState()
     var web3
@@ -12,28 +12,32 @@ function Playlottery({participants}) {
 
     if (window.ethereum) {
         web3 = new Web3(window.ethereum);
-        contractobj = new web3.eth.Contract(LotteryGeneratorJson, "0x5726118dF11A5B51933eF2b822f0B5293d285f1c")
-      }
-    
+        contractobj = new web3.eth.Contract(LotteryGeneratorJson, "0xa2D52E6F7c4488680FFb62397913be9718724eA2")
+    }
+    console.log("account",accounts)
+
+
     const submit = (event) => {
         event.preventDefault();
-        if(eth > 25){
+        if (eth > 25) {
             window.alert("Max Tickests Purches 25 only")
         }
-    
-        else{  
-        try{
-        let tickets = contractobj.methods.enterLottery({
-            from: '0xd1Ffbe730B63F482959b8535543A84eB268Df53c',
-            gas: "1000000",
-            value: web3.utils.toWei(0.01, "ether")
-          }).call();
-        console.log('tickets',tickets)
+
+        else {
+            try {
+                contractobj.methods.enterLottery().send({
+                    from: accounts, 
+                    value: eth*10**18
+                   })
+            .then(res => 
+                  console.log('Success', res))
+            .catch(err => console.log(err)) 
+                
+            }
+            catch (error) {
+                console.log(error)
+            }
         }
-        catch(error){
-            console.log(error)
-        }
-    }
     };
 
     return (
@@ -62,10 +66,10 @@ function Playlottery({participants}) {
                     </thead>
                     <tbody>
                         {participants.map(items =>
-                        <tr>
-                            
-                            <td>{items}</td>
-                        </tr>
+                            <tr>
+
+                                <td>{items}</td>
+                            </tr>
                         )}
                     </tbody>
                 </table>

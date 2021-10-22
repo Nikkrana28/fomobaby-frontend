@@ -12,7 +12,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
   const [status, setStatus] = useState(false);
   const [show, setShow] = useState(false)
   const [lastwinner, setLastwinner] = useState()
-  const [showexpired, setShowexpired] = useState(false)
+  const [account, setAccount] = useState(false)
   const [expirdid, setExpiredid] = useState([])
   const [showwinner, setShowwinner] = useState(false)
   var web3
@@ -20,30 +20,31 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
 
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
-    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0x5726118dF11A5B51933eF2b822f0B5293d285f1c")
+    contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0xa2D52E6F7c4488680FFb62397913be9718724eA2")
   }
 
-  
+
   const getlastwinner = async (value) => {
+    const accounts = await web3.eth.getAccounts();
+    setAccount(accounts[0]);
     return await contractobj.methods.getLotteryStats(value).call();
   }
 
-  function get (value){
-
-  (async () => {
-    let win = await getlastwinner(value)
-    setLastwinner(win[2])
-  })()
-
-   return lastwinner
+  
+  function get(value) {
+    (async () => {
+      let win = await getlastwinner(value)
+      setLastwinner(win[2])
+    })()
+    return lastwinner
   }
 
-  console.log('winner', winners)
-  
+  console.log('winner', players)
+
 
   return (
     <div>
-      {show ? <Playlottery participants={players}/> :
+      {show ? <Playlottery participants={players}  accounts={account}/> :
         <div className='paraent'>
           <div className="card" style={{ width: "22rem" }}>
             <div className="card-body">
@@ -59,7 +60,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
           </div>
 
         </div>}
-        <br/>
+      <br />
       {show ? <button onClick={() => { setShow(!true) }} className="play-btn" >Go Back</button> : null}
 
       {expiredlottery ?
@@ -67,12 +68,12 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
           <br />
           <br />
           <br />
-          
+
           <h2>Expired Lotteries</h2>
           <div className='paraent mt-3'>
-            {idslist.map(item => 
-            <Expiredlottery winner={get(item)}  id={idslist.indexOf(item)}/>)}
-            </div>
+            {idslist.map(item =>
+              <Expiredlottery winner={get(item)} id={idslist.indexOf(item)} />)}
+          </div>
           {/* {showexpired ? <button onClick={() => { setShowexpired(!true) }} className="play-btn" >Go Back</button> : null} */}
         </div> : null}
       <br />
@@ -103,7 +104,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
     //     </div>
 
 
-   
+
   )
 }
 

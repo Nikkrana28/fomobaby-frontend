@@ -170,19 +170,6 @@
   },
   {
     "inputs": [],
-    "name": "currentLotteryEndTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "currentLotteryID",
     "outputs": [
       {
@@ -241,49 +228,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getCurrentLotteryStats",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "lotteryAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lotteryID",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address[]",
-        "name": "entrants",
-        "type": "address[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "potentialWinnings",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "currentTicketsHeld",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "endTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isLive",
-        "type": "bool"
       }
     ],
     "stateMutability": "view",

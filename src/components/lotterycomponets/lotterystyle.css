@@ -10,7 +10,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
-  background-color: rgb(139, 221, 139);
+  background-color: #058A22;
   box-shadow: 10px 5px rgba(223, 236, 225, 0.658);
   border-radius: 6px;
   padding: 10px;
