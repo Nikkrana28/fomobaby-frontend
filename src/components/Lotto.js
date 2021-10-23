@@ -54,7 +54,7 @@ const ComingSoon = () => {
   }
 
 
-  console.log("ids", idslist[0])
+  console.log("ids1", idslist)
   return (
 
     <div className="wrapper">

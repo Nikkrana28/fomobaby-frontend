@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://res.cloudinary.com/ontraveldiary/image/upload/v1633290594/FOMOBABY/bg-top.ab4f7003_uiksih.png");
+  background-image: url("https://res.cloudinary.com/ontraveldiary/image/upload/v1633352992/FOMOBABY/background1_oo36u2.png");
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -10,10 +10,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
-  background-color: #058A22;
-  box-shadow: 10px 5px rgba(223, 236, 225, 0.658);
-  border-radius: 6px;
-  padding: 10px;
+ 
 
 }
 

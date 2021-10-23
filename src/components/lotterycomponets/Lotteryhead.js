@@ -18,6 +18,15 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
   var web3
   var contractobj
 
+  useEffect(() => {
+    getaccountaddress();
+  }, [])
+
+  const getaccountaddress = async () => {
+    const accounts = await web3.eth.getAccounts();
+    setAccount(accounts[0]);
+  }
+
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
     contractobj = new web3.eth.Contract(lotteryGeneratorJson, "0xa2D52E6F7c4488680FFb62397913be9718724eA2")
@@ -25,8 +34,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
 
 
   const getlastwinner = async (value) => {
-    const accounts = await web3.eth.getAccounts();
-    setAccount(accounts[0]);
+ 
     return await contractobj.methods.getLotteryStats(value).call();
   }
 
@@ -39,7 +47,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
     return lastwinner
   }
 
-  console.log('winner', players)
+  console.log('ids2',idslist )
 
 
   return (
@@ -72,7 +80,7 @@ function Lotteryhead({ lotteryadd, id, players, lotterystats, winners, winningam
           <h2>Expired Lotteries</h2>
           <div className='paraent mt-3'>
             {idslist.map(item =>
-              <Expiredlottery winner={get(item)} id={idslist.indexOf(item)} />)}
+              <Expiredlottery winner={'sdfhjdhfjsdhfkjs'} id={idslist.indexOf(item)} />)}
           </div>
           {/* {showexpired ? <button onClick={() => { setShowexpired(!true) }} className="play-btn" >Go Back</button> : null} */}
         </div> : null}
